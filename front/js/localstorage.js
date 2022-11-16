@@ -7,29 +7,34 @@ class canape{
   }
 }
 
-function saveBasket(canape){
+function saveBasket(canapes){
 
-  localStorage.setItem("canape", JSON.stringify(canape))
+  localStorage.setItem("canapes", JSON.stringify(canapes))
 
 }
 
 function getBasket() {
-  let canape = localStorage.getItem("canape")
-  if(canape == null){
+  let canapes = localStorage.getItem("canapes")
+  if(!canapes){
     return [];
   }else{
-    return JSON.parse(canape)
+    return JSON.parse(canapes)
   }
 }
 
 function addBasket(product){
-  let canape = getBasket();
-  let foundProduct = canape.find(p => p.id == product.id)
+  let canapes = getBasket();
+  let foundProduct = canapes.find(p => p.id === product.id && p.colors === product.colors)
   if (foundProduct != undefined) {
     foundProduct.quantity++;
   } else {
     product.quantity = 1;
-    canape.push(product);
+    canapes.push(product);
   }
-  saveBasket(canape)
+  saveBasket(canapes)
+}
+
+function removeFromBasket(product){
+  let canapes = getBasket();
+  
 }
